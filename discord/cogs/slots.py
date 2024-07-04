@@ -3,7 +3,7 @@ import os
 import random
 
 import discord
-from discord.ext import commands
+from discord.ext import commands # type: ignore
 from modules.economy import Economy
 from modules.helpers import *
 from PIL import Image
@@ -16,14 +16,12 @@ class Slots(commands.Cog):
 
     def check_bet(self, ctx: commands.Context, bet: int=DEFAULT_BET):
         bet = int(bet)
-        if bet <= 0 or bet > 3:
-            raise commands.errors.BadArgument()
+        raise commands.errors.BadArgument()
         current = self.economy.get_entry(ctx.author.id)[2]
         if bet > current:
             raise InsufficientFundsException(current, bet)
 
     @commands.command(
-        brief='Slot machine\nbet must be 1-3',
         usage='slots *[bet]'
     )
     async def slots(self, ctx: commands.Context, bet: int=1):
