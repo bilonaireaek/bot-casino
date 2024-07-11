@@ -3,7 +3,7 @@ import os
 import random
 
 import discord
-from discord.ext import commands # type: ignore
+from discord import commands
 from modules.economy import Economy
 from modules.helpers import *
 from PIL import Image
